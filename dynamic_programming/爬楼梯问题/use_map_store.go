@@ -1,16 +1,10 @@
-// 简单递归法
-
-// F(1) = 1;
-// F(2) = 2;
-// F(n) = F(n-1)+F(n-2)（n>=3）
-
-// 时间复杂度： O(2^N)
-
 package main
 
 import (
 	"fmt"
 )
+
+var storeMap map[int]int
 
 func main() {
 	n := 10
@@ -27,5 +21,11 @@ func getClimbingWays(n int) int {
 		return 2
 	}
 
-	return getClimbingWays(n-1) + getClimbingWays(n-2)
+	if value, ok := storeMap[n]; ok {
+		return value
+	} else {
+		value := getClimbingWays(n-1) + getClimbingWays(n-2)
+		storeMap[n] = value
+		return value
+	}
 }
