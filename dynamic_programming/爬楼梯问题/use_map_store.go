@@ -1,10 +1,12 @@
+// 使用了map存储已经计算过的值
+// 时间复杂度和空间复杂度都是 N
 package main
 
 import (
 	"fmt"
 )
 
-var storeMap map[int]int
+var storeMap = map[int]int{}
 
 func main() {
 	n := 10
