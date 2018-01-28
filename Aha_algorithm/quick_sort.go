@@ -36,10 +36,10 @@ func quickSort(left, right int) {
 	temp = array[left]
 
 	for i != j {
-		for array[j] >= temp && i < j { //顺序很重要，要先从右往左找
+		for array[j] >= temp && i < j { //顺序很重要，要先从右往左找, 找到比基准数小的数停下
 			j--
 		}
-		for array[i] <= temp && i < j { //再从左往右找
+		for array[i] <= temp && i < j { //再从左往右找，找到比基准数大的数停下
 			i++
 		}
 		if i < j { //当哨兵i和哨兵j没有相遇时 交换i和j
@@ -48,7 +48,7 @@ func quickSort(left, right int) {
 	}
 	//i==j 相遇了 最终将基准数归位
 	array[left], array[i] = array[i], array[left]
-
+	// 递归 分而治之
 	quickSort(left, i-1) //继续处理左边的，这里是一个递归的过程
 
 	quickSort(i+1, right) //继续处理右边的，这里是一个递归的过程
