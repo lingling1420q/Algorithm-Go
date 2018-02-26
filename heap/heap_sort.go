@@ -17,19 +17,19 @@ func main() {
 func siftdown(i int) {
 	var t, flag int // flag用来标记是否需要继续向下调整
 	// 当i节点有儿子，并且有需要继续调整的时候循环就执行
-	for i*2 <= n && flag == 0 {
+	for i*2+1 <= n && flag == 0 {
 		// 首先判断它和左儿子的关系，并用t记录值较小的节点编号
-		if array[i] > array[i*2] {
-			t = i * 2
+		if array[i] > array[i*2+1] {
+			t = i*2 + 1
 		} else {
 			t = i
 		}
 
 		//如果它有右儿子，再对右儿子进行讨论
-		if i*2+1 <= n {
+		if i*2+2 <= n {
 			// 如果右儿子的值更小，更新较小的节点编号
-			if array[t] > array[i*2+1] {
-				t = i*2 + 1
+			if array[t] > array[i*2+2] {
+				t = i*2 + 2
 			}
 		}
 		// 如果发现最小的节点编号不是自己，说明子节点中有比父节点更小的.将父节点和儿子节点交换
