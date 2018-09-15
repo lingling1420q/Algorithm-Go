@@ -45,6 +45,7 @@ func quickSort(nums []int, ch chan int, level int, threads int) {
 	for i := range leftCh {
 		ch <- i
 	}
+	// fmt.Println("base", left)
 	ch <- left // 将基准值传给ch
 
 	for i := range rightCh {

@@ -7,12 +7,13 @@ import (
 	tree "./tree"
 )
 
+//  递归遍历这棵树的每一个node节点，将node的左儿子节点和右儿子节点互换，之后继续递归下去，直到叶子节点或同时没有左儿子节点和右儿子节点的节点位置
 func Reverse(root *tree.TNode) {
 	if root == nil {
 		return
 	}
 
-	if root.Left == nil && root.Right == nil {
+	if root.Left == nil && root.Right == nil { // 判断节点是否同时有左儿子节点和右儿子节点
 		return
 	}
 
