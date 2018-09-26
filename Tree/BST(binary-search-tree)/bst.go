@@ -52,18 +52,19 @@ func (b *BST) insert(item *Node) error {
 		}
 	}
 
-	item.Parent = y
+	item.Parent = y //y就是父亲节点，也是要插入的地方的叶子节点
 	if y == nil {
 		b.Root = item
 		return nil
 	} else if item.Key < y.Key {
-		y.Left = item
+		y.Left = item // item更小接入到左节点
 	} else {
-		y.Right = item
+		y.Right = item // item更大接入到右节点
 	}
 	return nil
 }
 
+// 二叉搜索查找 log(n) 最坏 O(n)
 func (b *BST) Search(key int) *Node {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
@@ -96,7 +97,7 @@ func (b *BST) Delete(key int) {
 func (b *BST) Traverse() {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	fn := func(n *Node) {
+	fn := func(n *Node) { // callback func
 		fmt.Println(n.Key)
 	}
 	b.Root.traverse(fn)
@@ -140,6 +141,18 @@ func (b *BST) Successor(key int) (int, error) {
 	return n.Key, nil
 }
 
+func (n *Node) successor() *Node {
+	if n.Right != nil {
+		return n.Right.minimum()
+	}
+	y := n.Parent
+	for y != nil && n == y.Right {
+		n = y
+		y = y.Parent
+	}
+	return y
+}
+
 func newNode(key int, val string) *Node {
 	return &Node{Key: key, Value: val}
 }
@@ -170,7 +183,7 @@ func (n *Node) maximum() *Node {
 	return n //返回最后一个右子树节点，就是最大值的节点
 }
 
-// 中序遍历
+// 中序遍历,递归其实就是函数就是先入栈，后出栈的过程
 func (n *Node) traverse(fn func(*Node)) {
 	if n == nil {
 		return
@@ -214,6 +227,7 @@ func removeNode(a *Node, key int) *Node {
 	return a
 }
 
+// 交换两个节点
 func swapNode(a, b *Node) {
 	*a, *b = *b, *a
 }
