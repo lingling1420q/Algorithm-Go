@@ -7,12 +7,13 @@ func mergeSort(r []int) []int {
 	if length <= 1 { // 先递归按中间不断拆分，到数组r长度为1，然后递归出栈进行排序合并
 		return r
 	}
-	mid := length / 2
+	mid := length / 2 // 当r是元素为2个的数组时，递归结束，开始将left和right进行merge排序
 	left := mergeSort(r[:mid])
 	right := mergeSort(r[mid:])
 	return merge(left, right)
 }
 
+// 将两个有序数组，合并成一个有序数组
 func merge(left, right []int) (result []int) {
 	l, r := 0, 0
 	for l < len(left) && r < len(right) { // 停止的条件其实是，left或right数组有一个遍历完
