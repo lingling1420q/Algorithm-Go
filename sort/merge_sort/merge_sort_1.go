@@ -7,9 +7,9 @@ func mergeSort(r []int) []int {
 	if length <= 1 { // 先递归按中间不断拆分，到数组r长度为1，然后递归出栈进行排序合并
 		return r
 	}
-	mid := length / 2 // 当r是元素为2个的数组时，递归结束，开始将left和right进行merge排序
-	left := mergeSort(r[:mid])
-	right := mergeSort(r[mid:])
+	mid := length / 2           // 当r是元素为2个的数组时，递归结束，开始将left和right进行merge排序
+	left := mergeSort(r[:mid])  // 先不断的递归左部分，递归返回得到最大左部分
+	right := mergeSort(r[mid:]) // 再不断的递归右部分，递归返回得到最大右部分
 	return merge(left, right)
 }
 
