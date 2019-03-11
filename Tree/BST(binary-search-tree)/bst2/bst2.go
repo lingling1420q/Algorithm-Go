@@ -3,11 +3,9 @@ package tree
 import (
 	"fmt"
 	"sync"
-
-	generic "github.com/cheekybits/genny/generic"
 )
 
-type Item generic.Type
+type Item interface{}
 
 type Node struct {
 	key   int
@@ -36,7 +34,7 @@ func insertNode(node, newNode *Node) {
 	// 插入到左子树，左边更小
 	if newNode.key < node.key {
 		if node.left == nil {
-			node.left == newNode
+			node.left = newNode
 		} else {
 			//递归查找左边插入
 			insertNode(node.left, newNode)
