@@ -51,11 +51,11 @@ func (this *Trie) Search(word string) bool {
 	slen := len(chars)
 	node := this.Root
 	for i := 0; i < slen; i++ {
-		if _, exists := node.Children[chars[i]]; !exists {
+		if _, exists := node.Children[chars[i]]; !exists { // 有字符不匹配
 			return false
 		}
-		node = node.Children[chars[i]] // 将node指针移到子节点上
-		if node.End == true && i == slen-1 {
+		node = node.Children[chars[i]]       // 将node指针移到子节点上
+		if node.End == true && i == slen-1 { // 执行到最后
 			return true
 		}
 	}
